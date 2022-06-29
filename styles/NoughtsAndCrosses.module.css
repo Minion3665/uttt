@@ -1,0 +1,19 @@
+.grid {
+/*  border-collapse: collapse;  */
+  margin: 3px;
+  display: inline-block;
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+
+.cell {
+  width: 2em;
+  height: 2em;
+  border-radius: 10px;
+  background-color: lightgrey;
+  transition: background-color 0.2s;
+}
+
+.highlight {
+  background-color: yellow
+}
