@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import Styles from '../styles/NoughtsAndCrosses.module.css';
 
 const NoughtsAndCrosses: NextPage = (props) => {
-	const { winner, highlight, turn, onMove, grid, colorblind } = props;
+	const { winner, highlight, turn, onMove, grid, colorblind } = props as {winner: string, highlight: boolean, turn: string, onMove: (row: number, col: number) => void, colorblind: string, grid: string[][]};
 
-		const makeMove = (space) => {
+		const makeMove = (space: number) => {
 		const height = grid.length;
 		if (!height) throw new Error("Grid is empty");
 		const width = grid[0].length;
