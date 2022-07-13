@@ -28,6 +28,11 @@
   background-color: #f6d43c;
 }
 
+.highlight.empty {
+  color: black;
+  cursor: pointer;
+}
+
 .x {
   background-color: var(--redSubgridColor);
 }

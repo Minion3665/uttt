@@ -1,7 +1,8 @@
 import type {NextPage} from 'next'
 import NoughtsAndCrosses from '../components/NoughtsAndCrosses';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Styles from '../styles/Home.module.css';
+import useCookie from 'react-use-cookie';
 
 const emptyGame = [
     ["", "", ""],
@@ -26,7 +27,10 @@ const createGrid = (_, index: number) => {
 const Home: NextPage = () => {
     const [winner, setWinner] = useState<string | null>(null);
     const [turn, setTurn] = useState("x");
-    const [colorblind, setColorblind] = useState(false);
+    const [colorblindCookie, setColorblind] = useCookie('colorblindMode', '');
+    const [colorblind, setColorblindState] = useState('');
+
+    useEffect(() => setColorblindState(colorblindCookie), [colorblindCookie]);
 
     const [grid, setGrid] = useState([...Array(3)].map(() => {
         return [...Array(3)].map(createGrid)
@@ -105,8 +109,8 @@ const Home: NextPage = () => {
         </div>
 	<div className={Styles.sidebar}>
 	    {winner ? <h1>The game is over; {colorblind ? winner : winner === 'x' ? 'red' : 'blue'} wins!</h1> : <h1>It's {colorblind ? turn : turn === 'x' ? 'red' : 'blue'}'s turn</h1>}
-	    <a href="." className={Styles.link}>Clear the board</a><br/>
-	    <a href="#" onClick={() => setColorblind(value => !value)} className={Styles.link}>{colorblind ? 'Disable' : 'Enable'} colorblind mode</a>
+	    <a href={`.`} className={Styles.link}>Clear the board</a><br/>
+	    <a href={`#`} onClick={() => setColorblind(colorblind ? '' : 'enabled')} className={Styles.link}>{colorblind ? 'Disable' : 'Enable'} colorblind mode</a>
             <h1>Game rules</h1>
             <ul>
                 <li>There are 9 noughts and crosses grids, arranged in a 3 by 3 square</li>

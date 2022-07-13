@@ -18,7 +18,7 @@ const NoughtsAndCrosses: NextPage = (props) => {
 		<table className={Styles.grid + (winner ? " " + Styles[winner] : "") + (colorblind ? " " + Styles.colorblind : "")}><tbody>
 		{
 			grid.map((row, rowindex) => <tr key={rowindex}>{
-				row.map((cell, cellindex) => <td key={cellindex} className={Styles.cell + (highlight ? " " + Styles.highlight : "") + (cell ? " " + Styles[cell] : "")} onClick={() => makeMove(rowindex * 3 + cellindex)}>{colorblind ? cell : null}</td>)
+				row.map((cell, cellindex) => <td key={cellindex} className={Styles.cell + (highlight ? " " + Styles.highlight : "") + " " + (cell ? Styles[cell] : Styles.empty)} onClick={() => makeMove(rowindex * 3 + cellindex)}>{colorblind ? cell || (highlight ? "-" : ""): null}</td>)
 			}
 			</tr>)
 		}
