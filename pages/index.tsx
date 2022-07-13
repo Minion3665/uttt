@@ -1,4 +1,5 @@
 import type {NextPage} from 'next';
+import Head from 'next/head';
 import NoughtsAndCrosses from '../components/NoughtsAndCrosses';
 import {useEffect, useState} from 'react';
 import Styles from '../styles/Home.module.css';
@@ -97,6 +98,9 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Ultimate Tic-Tac-Toe</title>
+      </Head>
       <div className={Styles.section}>
         <div className={Styles.grid + (winner ? ' ' + Styles[winner] : '')}>
           {grid.map((row, rowIndex) => (
