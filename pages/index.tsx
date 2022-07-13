@@ -25,12 +25,16 @@ const createGrid = (_, index: number) => {
 }
 
 const Home: NextPage = () => {
+    const [loaded, setLoaded] = useState(false);
     const [winner, setWinner] = useState<string | null>(null);
     const [turn, setTurn] = useState("x");
     const [colorblindCookie, setColorblind] = useCookie('colorblindMode', '');
     const [colorblind, setColorblindState] = useState('');
 
-    useEffect(() => setColorblindState(colorblindCookie), [colorblindCookie]);
+    useEffect(() => {
+      setColorblindState(colorblindCookie);
+      setLoaded(true);
+    }, [loaded, colorblindCookie]);
 
     const [grid, setGrid] = useState([...Array(3)].map(() => {
         return [...Array(3)].map(createGrid)
@@ -124,6 +128,7 @@ const Home: NextPage = () => {
         <div className={Styles.section}>
         <a href="https://bejofo.net/ttt" className={Styles.link}>Not with your friend right now? Play Yannick Rietz&apos;s online version at bejofo.net instead</a>
         </div>
+        <div className={Styles.loadingBox + (loaded ? " " + Styles.loaded : "")}>Loading...</div>
         </>
     )
 }
