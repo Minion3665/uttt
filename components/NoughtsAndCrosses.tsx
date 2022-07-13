@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Styles from '../styles/NoughtsAndCrosses.module.css';
 
 interface NoughtsAndCrossesProps {
-  winner: string;
+  winner: string | null;
   highlight: boolean;
   onMove: (row: number, col: number) => void;
   colorblind: string;
