@@ -112,7 +112,7 @@ const Home: NextPage = () => {
             )}
         </div>
 	<div className={Styles.sidebar}>
-	    {winner ? <h1>The game is over; {colorblind ? winner : winner === 'x' ? 'red' : 'blue'} wins!</h1> : <h1>It's {colorblind ? turn : turn === 'x' ? 'red' : 'blue'}'s turn</h1>}
+	    {winner ? <h1>The game is over; {colorblind ? winner?.toUpperCase() : winner === 'x' ? 'red' : 'blue'} wins!</h1> : <h1>It's {colorblind ? turn?.toUpperCase() : turn === 'x' ? 'red' : 'blue'}'s turn</h1>}
 	    <a href={`.`} className={Styles.link}>Clear the board</a><br/>
 	    <a href={`#`} onClick={() => setColorblind(colorblind ? '' : 'enabled')} className={Styles.link}>{colorblind ? 'Disable' : 'Enable'} colorblind mode</a>
             <h1>Game rules</h1>
