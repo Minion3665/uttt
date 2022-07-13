@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Styles from '../styles/NoughtsAndCrosses.module.css';
 
 const NoughtsAndCrosses: NextPage = (props) => {
-	const { winner, highlight, turn, onMove, grid } = props;
+	const { winner, highlight, turn, onMove, grid, colorblind } = props;
 
 		const makeMove = (space) => {
 		const height = grid.length;
@@ -15,10 +15,10 @@ const NoughtsAndCrosses: NextPage = (props) => {
 		onMove(row, col);
 	};
 	return (
-		<table className={Styles.grid + (winner ? " " + Styles[winner] : "")}><tbody>
+		<table className={Styles.grid + (winner ? " " + Styles[winner] : "") + (colorblind ? " " + Styles.colorblind : "")}><tbody>
 		{
 			grid.map((row, rowindex) => <tr key={rowindex}>{
-				row.map((cell, cellindex) => <td key={cellindex} className={Styles.cell + (highlight ? " " + Styles.highlight : "") + (cell ? " " + Styles[cell] : "")} onClick={() => makeMove(rowindex * 3 + cellindex)}/>)
+				row.map((cell, cellindex) => <td key={cellindex} className={Styles.cell + (highlight ? " " + Styles.highlight : "") + (cell ? " " + Styles[cell] : "")} onClick={() => makeMove(rowindex * 3 + cellindex)}>{colorblind ? cell : null}</td>)
 			}
 			</tr>)
 		}
