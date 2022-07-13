@@ -1,19 +1,45 @@
 .grid {
 /*  border-collapse: collapse;  */
+  border-radius: 10px;
   margin: 3px;
   display: inline-block;
   border-spacing: 10px;
   border-collapse: separate;
 }
 
+.grid tbody tr {
+  background-color: var(--emptyCell);
+  transition: background-color 0.2s;
+}
+
 .cell {
   width: 2em;
   height: 2em;
   border-radius: 10px;
-  background-color: lightgrey;
   transition: background-color 0.2s;
+  background-color: inherit;
 }
 
 .highlight {
-  background-color: yellow
+  background-color: #f6d43c;
+}
+
+.x {
+  background-color: var(--redSubgridColor);
+}
+
+.o {
+  background-color: var(--blueSubgridColor);
+}
+
+.grid.x tbody tr, .grid.o tbody tr {
+  background-color: inherit;
+}
+
+.x.cell {
+  background-color: var(--redCellColor);
+}
+
+.o.cell {
+  background-color: var(--blueCellColor);
 }

@@ -1,6 +1,7 @@
 import type {NextPage} from 'next'
 import NoughtsAndCrosses from '../components/NoughtsAndCrosses';
 import {useState} from 'react';
+import Styles from '../styles/Home.module.css';
 
 const emptyGame = [
     ["", "", ""],
@@ -57,12 +58,21 @@ const Home: NextPage = () => {
             if (winner) return
             let newGrid = [...grid];
             console.log({gridRow, gridCol, newGrid})
-            newGrid[gridRow][gridCol].grid[row][col] = turn;
-            if (gameOver(newGrid[gridRow][gridCol].grid)) newGrid[gridRow][gridCol].winner = turn;
+            if (!newGrid[gridRow][gridCol].playable) return;  // You can't play in a grid where you haven't been 'sent'
+            if (newGrid[gridRow][gridCol].winner) return;  // You can't play when there's a winner
 
+
+	    if (newGrid[gridRow][gridCol].grid[row][col]) return;  // You can't play in a space where there's already a piece
+            newGrid[gridRow][gridCol].grid[row][col] = turn;
+            const finished = gameOver(newGrid[gridRow][gridCol].grid);
+            if (finished) newGrid[gridRow][gridCol].winner = turn;
+
+            if (gameOver(newGrid.map(row => row.map(col => col.winner ?? '')))) return setWinner(turn);
+
+            const sendingToFinished = newGrid[row][col].winner !== null;
             for (const [boardRowIndex, boardRow] of newGrid.entries()) {
                 for (const [boardColIndex, boardCol] of boardRow.entries()) {
-                    boardCol.playable = boardRowIndex === row && boardColIndex === col;
+                    boardCol.playable = sendingToFinished || boardRowIndex === row && boardColIndex === col;
                 }
             }
 
@@ -72,21 +82,28 @@ const Home: NextPage = () => {
     })
 
     return (
-        <>
+	<>
+        <div className={Styles.grid + (winner ? " " + Styles[winner] : "")}>
             {grid.map((row, rowIndex) => (
                 <>
-                    {row.map(({grid: subgrid, winner, playable}, colIndex) => {
+                    {row.map(({grid: subgrid, winner: subgridWinner, playable}, colIndex) => {
                     const {onMove} = functionsForGridIndex(rowIndex, colIndex);
                     // @ts-ignore TODO: Remove this after fixing warning
-                    return <NoughtsAndCrosses key={rowIndex.toString() + " " + colIndex} highlight={!winner && playable} grid={subgrid} turn={turn}
+                    return <NoughtsAndCrosses key={rowIndex.toString() + " " + colIndex} highlight={!winner && !subgridWinner && playable}  winner={subgridWinner} grid={subgrid} turn={turn}
                                               onMove={onMove}/>
                     })}
                     <br/>
                     </>
                 )
             )}
-            {winner}
-        </>
+        </div>
+	<div className={Styles.sidebar}>
+	    {winner ? <h1>The game is over; {winner === 'x' ? 'red' : 'blue'} wins!</h1> : <h1>It's {turn === 'x' ? 'red' : 'blue'}'s turn</h1>}
+	    <a href="." className={Styles.link}>Clear the board</a>
+	</div>
+	<br/>
+	    <a href="https://bejofo.net/ttt" className={Styles.link}>Not with your friend right now? Play Yannick Rietz&apos;s online version at bejofo.net instead</a>
+	</>
     )
 }
 
