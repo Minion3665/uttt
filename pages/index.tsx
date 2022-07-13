@@ -10,7 +10,7 @@ const emptyGame = [
   ['', '', ''],
 ];
 
-const createGrid = (_, index: number) => {
+const createGrid = (_: unknown, index: number) => {
   return {
     grid: emptyGame.map(row => [...row]),
     winner: null,
