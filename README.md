@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Final evaluation
+## Is it working as intended?
+Yes, the game works as intended.
 
-## Getting Started
+## Can you get back to your code and understand it?
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Should the code be refactored? Have you applied DRY? Separation of concerns?
+Yes, the code should be refactored. I have ~50 minutes left until I need to submit this, so I will try refactoring to better separate concerns before that time is up.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Have you commented it? Are the names of the components/variables meaningful?
+My components and variables are meaningfully named. I haven't written any comments; I may write comments about *why* certain parts are used (but not what the code does) before submission.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## What would you do if you had to start over?
+I would structure it differently such that a noughts and crosses cell was able to hold a grid inside of it. Right now, there's 2 separate ways of making a grid and I feel that this could be made with less repetition using a recursive approach.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## What have you learnt?
+I've used cookies in react functions for the first time, and come across some hurdles to do with that and hydration.
